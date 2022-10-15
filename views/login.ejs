@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> <%= page.title %> </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/app.js" defer></script>
+</head>
+
+<body>
+
+    <section>
+        <div class="imgBx">
+            <img src="<%= page.image %>" alt=" login page background image">
+        </div>
+        <div class="contentBx">
+            <div class="formBx">
+                <h2> <%= page.title %> </h2>
+                <% if(typeof errorCredentials != 'undefined'){ %>
+                    <p style="margin-bottom: 10px;">
+                        <span style="color: #ff4584; font-size: 15px; font-weight: bold;"> 
+                            <%= errorCredentials %> 
+                        </span>    
+                    </p>
+                <% } %>
+                <% if(typeof notActiveMessage != 'undefined'){ %>
+                    <p style="margin-bottom: 10px;">
+                        <span style="color: #ff4584; font-size: 12px; font-weight: bold;"> 
+                            <%= notActiveMessage %>
+                            <a href="/webapp/activate-user?username=<%= username %>"> <%= page.firstLinkText %> </a>
+                        </span>    
+                    </p>
+                <% } %>
+                <form action="/webapp/login" method="POST">
+                    <div class="inputBx">
+                        <span> <%= page.email %> </span>
+                        <input name="username" type="text" value="<%= username %>">
+                    </div>
+
+                    <div class="inputBx">
+                        <span> <%= page.password %> </span>
+                        <input name="password" type="password" value="<%= password %>">
+                    </div>
+                    <div class="inputBx">
+                        <button type="submit" class="btn" id="submit-form">
+                            <div>
+                                <h4> <%= page.btn %> </h4>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="inputBx">
+                        <p>
+                            <%= page.tip %>
+                            <a href="/webapp/create-user"> <%= page.secondLinkText %> </a>
+                        </p>
+                    </div>
+                    <div class="inputBx">
+                        <p>
+                            <a href="/webapp/update-user-password"> <%= page.thirdLinkText %> </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

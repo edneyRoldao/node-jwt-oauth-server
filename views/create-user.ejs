@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= page.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/app.js" defer></script>
+</head>
+
+<body>
+    <section>
+        <div class="imgBx">
+            <img src="<%= page.image %>" alt=" login page background image">
+        </div>
+        <div class="contentBx">
+            <div class="formBx">
+                
+                <h2><%= page.title %></h2>
+
+                <% if(typeof error_user_register != 'undefined'){ %>
+                    <p style="margin-bottom: 10px;">
+                        <span style="color: #ff4584; font-size: 15px; font-weight: bold;"> 
+                            <%= error_user_register %> 
+                        </span>    
+                    </p>
+                <% } %>
+
+                <form action="/webapp/create-user" method="POST">
+                    <div class="inputBx">
+                        <span><%= page.nameInput %></span>
+                        <input name="name" type="text" value="<%= name %>">
+                    </div>
+
+                    <div class="inputBx">
+                        <span><%= page.email %></span>
+                        <input name="username" type="text" value="<%= username %>">
+
+                        <% if(typeof error_username != 'undefined'){ %>
+                            <span style="color: #ff4584; font-size: 12px; font-weight: bold; margin-left: 22px;"> 
+                                <%= error_username %> 
+                            </span>
+                        <% } %>    
+                    </div>
+
+                    <div class="inputBx">
+                        <span><%= page.password %></span>
+                        <input name="password" type="password" value="<%= password %>">
+                        <% if(typeof error_password != 'undefined'){ %>
+                            <span style="color: #ff4584; font-size: 12px; font-weight: bold; margin-left: 22px;"> 
+                                <%= error_password %> 
+                            </span>
+                        <% } %>    
+                    </div>
+
+                    <div class="inputBx">
+                        <button type="submit" class="btn" id="submit-form">
+                            <div>
+                                <h4><%= page.btn %></h4>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="inputBx">
+                        <p> 
+                            <%= page.tip %>
+                            <a href="/webapp/login"><%= page.firstLinkText %></a> 
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

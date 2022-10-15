@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= page.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/app.js" defer></script>
+</head>
+
+<body>
+    <section>
+        <div class="imgBx">
+            <img src="<%= page.image %>" alt=" login page background image">
+        </div>
+        <div class="contentBx">
+
+            <div class="formBx">
+                <h2><%= page.title %></h2>
+
+                <% if(typeof message != 'undefined'){ %>
+                    <p style="margin-bottom: 10px;">
+                        <span style="color: #ff4584; font-size: 15px; font-weight: bold;"> 
+                            <%= message %> 
+                        </span>    
+                    </p>
+                <% } %>
+                <form action="/webapp/activate-user" method="POST">
+                    <div class="inputBx">
+                        <span><%= page.email %></span>
+                        <input name="username" type="text" value="<%= username %>">
+                    </div>
+                    <div class="inputBx">
+                        <span><%= page.codeInput %></span>
+                        <input name="code" type="text" value="<%= code %>">
+                    </div>
+                    <div class="inputBx">
+                        <button type="submit" class="btn" id="submit-form">
+                            <div>
+                                <h4><%= page.btn %></h4>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="inputBx">
+                        <p> 
+                            <%= page.tip %>
+                            <a href="/webapp/user/send-activation-code?username=<%= username %>"><%= page.firstLinkText %></a> 
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
