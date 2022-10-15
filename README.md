@@ -32,7 +32,7 @@ Short history: do you already stop to think we need an OAuth system to manage us
 Feel free to copy this code and used for your own needs. You just need to set the environments bellow to start testing.
 
 
-## Environment variables required to user this project (add those environments in .dotenv file to test locally)
+## Environment variables required to user this project (add those environments in .env file to test locally)
 - OAUTH_JWT_SERVER_ENV    (must be: development or production)
 - SERVER_PORT
 - MONGO_HOST
