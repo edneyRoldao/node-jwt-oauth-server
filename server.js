@@ -16,6 +16,10 @@ app.use('/auth', authRouter)
 app.use('/users', usersRouter)
 app.use('/webapp', webappRouter)
 
+app.get('/health', (req, res) => {
+    return res.status(200).json({ message: 'Application adnsolutions oauth server is working', date: new Date()})
+})
+
 // Unknown URL
 app.get('*', (req, res) => {
     if (appEnv.redirectNotFoundRoute)
