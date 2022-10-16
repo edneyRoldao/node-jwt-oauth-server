@@ -34,7 +34,7 @@ Feel free to copy this code and used for your own needs. You just need to set th
 
 ## Environment variables required to user this project (add those environments in .env file to test locally)
 - OAUTH_JWT_SERVER_ENV    (must be: development or production)
-- SERVER_PORT
+- PORT
 - MONGO_HOST
 - MONGO_PASSWORD
 - MONGO_USERNAME
@@ -50,7 +50,7 @@ Feel free to copy this code and used for your own needs. You just need to set th
 
 ## Properties that could be customized (./configs/environments)
 - env: 'development',
-- port: process.env.SERVER_PORT,
+- port: process.env.PORT,
 - purgeMongoDataCron: '0 0 * * *',
 - dataToBePurgedAfterMinutes: 24 * 60,        
 - updatePasswordCodeExpirationMinutes: 10,

@@ -2,7 +2,7 @@
 module.exports = {
     // app
     env: 'production',
-    port: process.env.SERVER_PORT,
+    port: process.env.PORT,
     purgeMongoDataCron: '0 0 * * *',
     dataToBePurgedAfterMinutes: 24 * 60,
     updatePasswordCodeExpirationMinutes: 10,
