@@ -1,8 +1,10 @@
 module.exports = {
+    internalServerError: 'Ocorreu um erro inesperado em nosso sistema, Isso não é sua culpa. Tente mais tarde',
     invalidToken: 'Token is Invalid',
     passwordCodeExpiration: 'password update code is expired',
     usernameAndPasswordRequired: 'username and password are required on body',
     userCreationSuccess: 'User has created. We sent an email to confirm and activate your account',
+    userCreationError: 'There was an internal error while try to save user in system database. Try again later',
     usernameRequired: 'username is required as query parameter',
     updatePasswordEmail: "update password code has been sent to user's email",
     activationAccountEmail: "activaton code has been sent to user's email",
@@ -33,6 +35,7 @@ module.exports = {
     emailFormatError: 'email format is invalid',
     emailRequiredError: 'email is required',
     emailError: 'email already exists',
+    emailNotificatonError: 'We are not able to send email notification. Try again later',
     activationCodeError: 'Invalid code',
     userNotFoundError: 'user not found',
     successPageTextLink: 'Login',

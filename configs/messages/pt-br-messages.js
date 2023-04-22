@@ -1,8 +1,10 @@
 module.exports = {
+    internalServerError: 'There was an unexpected error. It is not your fault. Try again later',
     invalidToken: 'Token expirado ou inválido',
     passwordCodeExpiration: 'O link para atualizar a senha expirou',
     usernameAndPasswordRequired: 'O email e a senha são obrigatórios',
     userCreationSuccess: 'Usuário criado com sucesso. Te enviamos um email para confirmar seu cadastro',
+    userCreationError: 'Ocorreu um erro interno durante o processo de salvamento do usuário em nosso sistema. Tente mais tarde',
     usernameRequired: 'username é obrigatório no query param',
     updatePasswordEmail: "Um link de atualização de senha foi enviado para o email cadastrado",
     activationAccountEmail: "Um link para ativar sua conta foi enviado por email",
@@ -33,6 +35,7 @@ module.exports = {
     emailFormatError: 'O formato do email é inválido',
     emailRequiredError: 'email é obrigatório',
     emailError: 'O email já está cadastrado',
+    emailNotificatonError: 'Não conseguimos fazer o envio do email, tente novamente mais tarde.',
     activationCodeError: 'Códido Inválido',
     userNotFoundError: 'Usuário não encontrado',
     successPageTextLink: 'Login',

@@ -10,26 +10,47 @@ const UserActivation = require('./../models/user-activation')
 const UserPasswordUpdate = require('./../models/user-password-update')
 const { isObjectIdValid, isPasswordFormatValid } = require('./../utils/validators-util')
 
+function createUser(requestBody) {
+    console.log("stage: init - location: users-service.createUser - body:", requestBody)
 
-async function createUser(requestBody) {
-    let user = new User()
-    user.username = requestBody.username
+    return new Promise((resolve, error) => {
+        let user = new User()
+        user.username = requestBody.username
+        user.profile = _getProfileFromRequest(requestBody)
+    
+        if (!isPasswordFormatValid(requestBody.password))
+            error(appMessages.passwordError)
+    
+        bcrypt.hash(requestBody.password, appEnv.userHashPasswordSaltOrRound).then(password => {
+            user.password = password
+            user.save().then(() => {
+                sendActivationCodeToUser(user.username).then(() => {
+                    const userResponse = copyObject(user)
+                    delete userResponse.password
 
-    if (!isPasswordFormatValid(requestBody.password))
-        throw new Error(appMessages.passwordError)
+                    console.log("users-service:SUCCESS - createUser - user has been created:", user.username)
+                    resolve(userResponse)
+                
+                // user mail notification erro
+                }).catch(err => {
+                    console.error("users-service:ERROR - createUser(user mail notification erro) - message: ", err.message)
+                    User.findOneAndRemove({email: user.username}).exec()
+                    error(appMessages.emailNotificatonError)
+                })
 
-    user.password = await bcrypt.hash(requestBody.password, appEnv.userHashPasswordSaltOrRound)
-    user.profile = _getProfileFromRequest(requestBody)
+            // save user at mongo
+            }).catch(err => {
+                console.error("users-service:ERROR - createUser(save user at mongo) - message: ", err.message)
+                error(appMessages.userCreationError)
+            })
 
-    user = await user.save()
-    await sendActivationCodeToUser(user.username)
-
-    const userResponse = copyObject(user)
-    delete userResponse.password
-
-    return userResponse
+        // password encryption error
+        })    .catch(err => {
+            console.error("users-service:ERROR - createUser(password encryption error) - message: ", err.message)
+            error(appMessages.internalServerError)
+        })
+    })
 }
-
 
 async function sendUpdatePasswordCode(username) {
     const user = await User.findOne({username: username})
@@ -206,17 +227,27 @@ function createUserErrorHandler(error, req) {
         password: req.body.password
     }
 
-    if (error.message.includes("`username` is required") )
+    if (error.includes("`username` is required")) {
         errorObj['error_username'] = appMessages.emailRequiredError
+        return errorObj
+    }
 
-    if (error.message.includes("`username` with value") )
+    if (error.includes("`username` with value")) {
         errorObj['error_username'] = appMessages.emailFormatError
+        return errorObj
+    }
 
-    if (error.message.includes('username_1 dup key') )
+    if (error.includes('username_1 dup key')) {
         errorObj['error_username'] = appMessages.emailError
+        return errorObj
+    }
 
-    if (error.message.includes('password') )
+    if (error.includes('password')) {
         errorObj['error_password'] = appMessages.passwordError
+        return errorObj
+    }
+
+    errorObj['error_user_register'] = error
 
     return errorObj
 }
