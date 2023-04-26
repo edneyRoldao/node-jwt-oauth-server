@@ -5,6 +5,7 @@ const appMessages = require('./../configs/i18n-config')()
 
 async function sendMailToUser(email, code, subject, message, type) {
     const transport = mailer.createTransport({
+        service: 'gmail',
         host: appEnv.mailSenderHost,
         port: appEnv.mailSenderPort,
         secure: appEnv.mailSenderSecure,

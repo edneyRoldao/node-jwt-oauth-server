@@ -107,3 +107,13 @@ npm start
 node
 require('crypto').randomBytes(64).toString('hex')
 ```
+
+## Enable sending email from GMAIL
+- go to manage your google account
+- select Security on left menu
+- select 2-step verification
+- select App passwords
+- select Other (Custom name), define a login and you will get a password
+- see .env 
+
+

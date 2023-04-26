@@ -9,7 +9,7 @@ UserController.prototype.create = async (req, res) => {
         return res.status(400).json({ message: appMessages.usernameAndPasswordRequired})
 
     try {
-        const user = userService.createUser(req.body)
+        const user = await userService.createUser(req.body)
        res.status(201).json({user, message: appMessages.userCreationSucess})
 
     } catch (error) {
