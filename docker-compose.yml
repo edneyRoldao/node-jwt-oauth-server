@@ -1,0 +1,8 @@
+version: "3"
+services:
+  branzil_invest_users:
+    build: -t test .
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
