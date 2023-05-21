@@ -82,8 +82,7 @@ WebappController.prototype.activateUser = async (req, res) => {
 WebappController.prototype.login = async (req, res) => {
     try {
         const accessToken = await jwtService.generate(req)
-        res.header('Authorization', `Bearer ${accessToken}`)
-        res.redirect(appEnv.redirectUrlAfterLogin)
+        res.redirect(`${appEnv.redirectUrlAfterLogin}?token=${accessToken}`)
 
     } catch (error) {
         const errorObj = {

@@ -11,7 +11,7 @@ module.exports = {
     apiRateLimitWindowInMinutes: 1,
     apiRateLimitAmount: 50,
     apiRateLimitMessage: 'To many requests from this IP, please try again later',
-    host: 'http://localhost:3030',
+    host: `http://localhost:${process.env.PORT}`,
     language: 'en', // options (en, pt-br)
     
     // mail
@@ -25,7 +25,7 @@ module.exports = {
 
     // WEB_APP
     redirectNotFoundRoute: '',
-    redirectUrlAfterLogin: 'https://financial-highlights.herokuapp.com',
+    redirectUrlAfterLogin: 'http://localhost:3001',
 
     // user
     activateCodeExpirationMinutes: 2,
